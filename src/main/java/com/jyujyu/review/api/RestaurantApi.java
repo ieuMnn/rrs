@@ -3,10 +3,16 @@ package com.jyujyu.review.api;
 
 import com.jyujyu.review.api.request.CreateAndEditRestaurantRequest;
 import com.jyujyu.review.api.request.CreateAndEditRestaurantRequestMenu;
+import com.jyujyu.review.model.RestaurantEntity;
+import com.jyujyu.review.service.RestaurantService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+@RequiredArgsConstructor // private final 는 RequiredArgs 필수임.
 @RestController
 public class RestaurantApi {
+
+    private final RestaurantService restaurantService;
 
     @GetMapping("/restaurants")
     public String getRestaurants(){
@@ -19,19 +25,28 @@ public class RestaurantApi {
 ;    }
 
     @PostMapping("restaurant")
-    public String createRestaurant(@RequestBody CreateAndEditRestaurantRequest request ){
-        return "This is createRestaurant " + request.getName() + ", " + request.getAddress()
-                + " menu[0].name " + request.getMenus().get(0).getName()
-                + ", " + request.getMenus().get(0).getPrice() ;
+//    public RestaurantEntity createRestaurant(@RequestBody CreateAndEditRestaurantRequest request ){
+//            return restaurantService.createRestaurant(request);
+    public void createRestaurant(@RequestBody CreateAndEditRestaurantRequest request ){
+        //return "This is createRestaurant " + request.getName() + ", " + request.getAddress()
+        //        + " menu[0].name " + request.getMenus().get(0).getName()
+        //        + ", " + request.getMenus().get(0).getPrice() ;
+
+        restaurantService.createRestaurant(request);
     }
     @PutMapping("/restaurant/{restaurantId}")
-    public String editRestaurant(@PathVariable Long restaurantId,
+//    public String editRestaurant(@PathVariable Long restaurantId,
+//                                 @RequestBody CreateAndEditRestaurantRequest request){
+//        return "This is editRestaurant " +restaurantId + ", " + request.getName() + ", " + request.getAddress();
+    public void editRestaurant(@PathVariable Long restaurantId,
                                  @RequestBody CreateAndEditRestaurantRequest request){
-        return "This is editRestaurant " +restaurantId + ", " + request.getName() + ", " + request.getAddress();
+     restaurantService.editRestaurant(restaurantId, request);
     }
     @DeleteMapping("/restaurant/{restaurantId}")
-    public String deleteRestaurant(@PathVariable Long restaurantId){
-        return "This is deleteRestaurant";
+//    public String deleteRestaurant(@PathVariable Long restaurantId){
+//        return "This is deleteRestaurant";
+    public void deleteRestaurant(@PathVariable Long restaurantId){
+        restaurantService.deleteRestaurant(restaurantId);
     }
 
 
