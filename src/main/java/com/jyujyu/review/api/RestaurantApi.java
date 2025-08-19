@@ -57,14 +57,14 @@ public class RestaurantApi {
 
     @PostMapping("restaurant")
 //    public RestaurantEntity createRestaurant(@RequestBody CreateAndEditRestaurantRequest request ){
+    //return "This is createRestaurant " + request.getName() + ", " + request.getAddress()
+    //        + " menu[0].name " + request.getMenus().get(0).getName()
+    //        + ", " + request.getMenus().get(0).getPrice() ;
 //            return restaurantService.createRestaurant(request);
     public void createRestaurant(@RequestBody CreateAndEditRestaurantRequest request ){
-        //return "This is createRestaurant " + request.getName() + ", " + request.getAddress()
-        //        + " menu[0].name " + request.getMenus().get(0).getName()
-        //        + ", " + request.getMenus().get(0).getPrice() ;
-
         restaurantService.createRestaurant(request);
     }
+
     @PutMapping("/restaurant/{restaurantId}")
 //    public String editRestaurant(@PathVariable Long restaurantId,
 //                                 @RequestBody CreateAndEditRestaurantRequest request){
@@ -73,6 +73,7 @@ public class RestaurantApi {
                                  @RequestBody CreateAndEditRestaurantRequest request){
      restaurantService.editRestaurant(restaurantId, request);
     }
+
     @DeleteMapping("/restaurant/{restaurantId}")
 //    public String deleteRestaurant(@PathVariable Long restaurantId){
 //        return "This is deleteRestaurant";

@@ -2,20 +2,24 @@ package com.jyujyu.review.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.ZonedDateTime;
 
+@Getter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="review")
 @Entity
-public class reviewEntity {
+public class ReviewEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private Integer restaurant_id;
+    private Long id;
+    private Long restaurantId;
     private String content;
-    private Long score;
-    private ZonedDateTime create_at;
+    private Double score;
+    private ZonedDateTime createdAt;
 }
